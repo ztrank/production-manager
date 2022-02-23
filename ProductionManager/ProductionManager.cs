@@ -211,6 +211,11 @@
                 this.InitializeInventory();
             }
 
+            /// <summary>
+            /// Gets the inventory count of the component type throughout the ship.
+            /// </summary>
+            /// <param name="type">Component type.</param>
+            /// <returns>My Fixed Point.</returns>
             private MyFixedPoint GetInventoryCount(ComponentType type)
             {
                 MyFixedPoint count = MyFixedPoint.Zero;
