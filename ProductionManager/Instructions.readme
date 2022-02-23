@@ -1,0 +1,96 @@
+﻿R e a d m e
+-----------
+
+Configuration
+--------------
+
+In the programmable block, setup the INI in the CustomData. It must have an assembler section unless you want it to use ALL assemblers and they are not cooperative, and for the display to work you need display group sections.
+To control the construction of a component, also include a section for that component.
+
+Assembler Section
+-----------------
+Header: [assemblers]
+
+cooperative: Optional boolean
+name: Optional string name of the controlling assembler. Required if cooperative is true.
+search: Optional string to search for assemblers.
+
+Example: 
+[assemblers]
+cooperative=true
+name=My Controlling Assembler
+search=Assembler
+
+
+Component Sections
+-------------------
+Header is the case insensitive name of the component from this list:
+            BulletproofGlass,
+            Canvas,
+            Computer,
+            Construction,
+            Detector,
+            Display,
+            Explosives,
+            Girder,
+            GravityGenerator,
+            InteriorPlate,
+            LargeTube,
+            Medical,
+            MetalGrid,
+            Motor,
+            PowerCell,
+            RadioCommunication,
+            Reactor,
+            SmallTube,
+            SolarCell,
+            SteelPlate,
+            Superconductor,
+            Thrust,
+            ZoneChip
+
+Optional Keys:
+name: string for the display name on visual displays. Defaults to the value from the above list.
+
+Required keys:
+max: amount the script will create up to when triggered. 
+min: amount the script will trigger on when it falls to or below the value. For example, if you set a min of 500, and you have 550 and you remove 50, it will create that component up to the max value
+
+Not having the required keys will not throw an exception, but it will mean the script will not create any and the display value will show you just a count, not a count out of an expected amount.
+
+Example:
+[bulletproofglass]
+name=Bulletproof Glass
+min=500
+max=1000
+
+Display Sections
+-----------------
+Header is any name not 'assemblers' or in the list of components. These for finding display panels. Settings for actual display are contained on the panel's CustomData.
+
+Required Keys:
+type: string values of either "block", "search", or "group"
+
+Example:
+
+[largePanel]
+type=block
+
+[smallPanelGroup]
+type=group
+
+[smallTextPanels]
+type=search
+
+
+Settings on Panels
+------------------
+
+Header: [production]
+Keys:
+index: Optional for text panels, but required for blocks that have multiple panels
+groupIndex: Optional unless in a group. Defaults to 0 so if you have many in a group without an index they will all show the same.
+
+[production]
+index=0
+groupIndex=1
